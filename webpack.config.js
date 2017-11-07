@@ -15,18 +15,15 @@ var autoprefixer = require('autoprefixer');
 // 'css-loader?importLoaders=1?-autoprefixer', 'postcss-loader'
 const defaultCopyPath = path.join(SRC_PATH, 'data/data.json');
 const copyPath = path.join(SRC_PATH, 'data/new.json');
+const entry = [path.resolve(__dirname, 'src/app.js'),
+path.resolve(__dirname, 'src/styles/index.scss')]
 
 let config = {
-  entry: {
-    bundle: './src/app.js',
-    styles: './src/styles/index.scss'
-  },
+  entry: entry,
   output: {
-    path: DIST_PATH,
-    filename: '[name].js',
+    filename: 'bundle.js',
     publicPath: '/',
-    hotUpdateChunkFilename: 'hot/hot-update.js',
-    hotUpdateMainFilename: 'hot/hot-update.json'
+    path: path.resolve(__dirname, 'dist')
   },
   devtool: 'source-map',
   module: {
@@ -36,22 +33,14 @@ let config = {
       loader: 'handlebars-loader'
     },
     {
-      test: /\.scss$/,
+      test: /\.css$/,
       use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-          { loader: 'css-loader?sourcemap' },
-          { loader: 'postcss-loader',
-          options: {
-            sourceMap: 'inline'
-          }},
-          { loader: 'sass-loader?sourcemap' },
-        ]
-      })
+        use: ['css-loader?importLoaders=1', 'postcss-loader']
+      }),
     },
     {
-      test: /\.css$/,
-      loader: ExtractTextPlugin.extract("css-loader?sourceMap", "postcss-loader")
+      test: /\.scss$/,
+      use: ExtractTextPlugin.extract(['css-loader?sourceMap!sass-loader?outputStyle=expanded&sourceMap=true&sourceMapContents=true',"postcss-loader"])
     },
     {
       exclude: /node_modules/,
@@ -73,6 +62,7 @@ plugins: [
     ],
     data: require('./src/data/data.json' )
   }),
+
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),
   new CopyWebpackPlugin([{

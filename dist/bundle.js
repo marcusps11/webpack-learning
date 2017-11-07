@@ -14,7 +14,7 @@
 /******/ 		var script = document.createElement("script");
 /******/ 		script.type = "text/javascript";
 /******/ 		script.charset = "utf-8";
-/******/ 		script.src = __webpack_require__.p + "hot/hot-update.js";
+/******/ 		script.src = __webpack_require__.p + "" + chunkId + "." + hotCurrentHash + ".hot-update.js";
 /******/ 		;
 /******/ 		head.appendChild(script);
 /******/ 	}
@@ -26,7 +26,7 @@
 /******/ 				return reject(new Error("No browser support"));
 /******/ 			try {
 /******/ 				var request = new XMLHttpRequest();
-/******/ 				var requestPath = __webpack_require__.p + "hot/hot-update.json";
+/******/ 				var requestPath = __webpack_require__.p + "" + hotCurrentHash + ".hot-update.json";
 /******/ 				request.open("GET", requestPath, true);
 /******/ 				request.timeout = requestTimeout;
 /******/ 				request.send(null);
@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0becd8f02a49a4a634b2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "56398d588e59a42161a4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -729,10 +729,18 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(1);
+module.exports = __webpack_require__(3);
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
-var _new = __webpack_require__(1);
+var _new = __webpack_require__(2);
 
 var _new2 = _interopRequireDefault(_new);
 
@@ -747,7 +755,7 @@ var Main = {
 Main.init();
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -764,6 +772,12 @@ var HelloMarcus = {
 };
 
 exports.default = HelloMarcus;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
