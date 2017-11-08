@@ -9,21 +9,22 @@ const SRC_PATH = path.resolve(__dirname, './src')
 const DIST_PATH = path.resolve(__dirname, './dist')
 const cssNano = require('cssnano');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-var autoprefixer = require('autoprefixer');
-
+console.log(path.join(__dirname, './src/data/marcus.json' ))
 
 // 'css-loader?importLoaders=1?-autoprefixer', 'postcss-loader'
 const defaultCopyPath = path.join(SRC_PATH, 'data/data.json');
 const copyPath = path.join(SRC_PATH, 'data/new.json');
-const entry = [path.resolve(__dirname, 'src/app.js'),
-path.resolve(__dirname, 'src/styles/index.scss')]
+
+const entry = [path.resolve(__dirname, 'src/app.js'), path.resolve(__dirname, 'src/styles/index.scss')]
 
 let config = {
   entry: entry,
   output: {
     filename: 'bundle.js',
     publicPath: '/',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    hotUpdateChunkFilename: 'hot/hot-update.js',
+    hotUpdateMainFilename: 'hot/hot-update.json'
   },
   devtool: 'source-map',
   module: {
@@ -60,7 +61,7 @@ plugins: [
     partials: [
       path.join(SRC_PATH, 'templates', '**', '*.hbs')
     ],
-    data: require('./src/data/data.json' )
+    data: path.join(__dirname, './src/data/marcus.json' )
   }),
 
   new webpack.HotModuleReplacementPlugin(),

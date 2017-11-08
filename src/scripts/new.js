@@ -1,7 +1,7 @@
 
 const HelloMarcus = {
   init: function() {
-    console.log('hello jhflksf')
+    console.log('dasihdfaksdash')
   }
 };
 
